@@ -9,7 +9,10 @@ module.exports = app => {
   );
 
   app.get('auth/google/callback',
-    passport.authenticate('google')
+    passport.authenticate('google'),
+    (req, res) => {
+      res.redirect('http://localhost:5000/');
+    }
   );
 
   //get the current user
