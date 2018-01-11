@@ -1,6 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 const keys = require('../config/dev');
 
 const User = mongoose.model('users');
@@ -15,6 +15,7 @@ passport.deserializeUser((id, done) => {
   });
 });
 
+//google strategy logic for google OAuth
 passport.use(
   new GoogleStrategy(
     {
@@ -24,6 +25,7 @@ passport.use(
       proxy: true
     },
     async (accessToken, refreshToken, profile, done) => {
+      console.log(profile);
       const existingUser = await User.findOne({ googleID: profile.id });
 
       //sign in
